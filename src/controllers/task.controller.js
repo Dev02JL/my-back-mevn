@@ -2,7 +2,6 @@ const Task = require('../models/task.model');
 const Project = require('../models/project.model');
 const asyncHandler = require('express-async-handler');
 
-// Créer une nouvelle tâche dans un projet
 exports.createTask = asyncHandler(async (req, res) => {
     const { title, description, assignee } = req.body;
     const { projectId } = req.params;
@@ -34,7 +33,6 @@ exports.createTask = asyncHandler(async (req, res) => {
     res.status(201).json(newTask);
 });
 
-// Obtenir toutes les tâches d'un projet
 exports.getTasksByProject = asyncHandler(async (req, res) => {
     const { projectId } = req.params;
     const userId = req.user.id;
@@ -49,7 +47,6 @@ exports.getTasksByProject = asyncHandler(async (req, res) => {
     res.status(200).json(tasks);
 });
 
-// Mettre à jour une tâche
 exports.updateTask = asyncHandler(async (req, res) => {
     const { taskId } = req.params;
     const { title, description, status, assignee } = req.body;
@@ -81,7 +78,6 @@ exports.updateTask = asyncHandler(async (req, res) => {
     res.status(200).json(task);
 });
 
-// Supprimer une tâche
 exports.deleteTask = asyncHandler(async (req, res) => {
     const { taskId } = req.params;
     const userId = req.user.id;

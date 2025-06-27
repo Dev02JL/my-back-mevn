@@ -108,4 +108,26 @@ exports.addCollaborator = asyncHandler(async (req, res) => {
     const updatedProject = await Project.findById(projectId).populate('owner', 'name email').populate('collaborators', 'name email');
 
     res.status(200).json(updatedProject);
+});
+
+// Obtenir le détail d'un projet
+exports.getProjectById = asyncHandler(async (req, res) => {
+    const { projectId } = req.params;
+    const userId = req.user.id;
+
+    const project = await Project.findById(projectId)
+        .populate('owner', 'name')
+        .populate('collaborators', 'name');
+
+    if (!project) {
+        res.status(404);
+        throw new Error('Projet non trouvé.');
+    }
+
+    if (!project.collaborators.map(u => u._id.toString()).includes(userId)) {
+        res.status(403);
+        throw new Error('Accès non autorisé à ce projet.');
+    }
+
+    res.status(200).json(project);
 }); 

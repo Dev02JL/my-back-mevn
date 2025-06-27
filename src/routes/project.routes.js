@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createProject, getProjects, addCollaborator, updateProject, deleteProject } = require('../controllers/project.controller');
+const { createProject, getProjects, addCollaborator, updateProject, deleteProject, getProjectById } = require('../controllers/project.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 const taskRouter = require('./task.routes'); // Importer le routeur des tâches
 const { projectValidator } = require('../validators/project.validator');
@@ -22,10 +22,20 @@ router.post('/', projectValidator, validate, createProject);
 // @access  Private
 router.get('/', getProjects);
 
+// @route   GET /api/projects/:projectId
+// @desc    Get project details by ID
+// @access  Private (collaborators only)
+router.get('/:projectId', getProjectById);
+
 // @route   PUT /api/projects/:projectId
 // @desc    Update a project
 // @access  Private (Owner only)
 router.put('/:projectId', projectValidator, validate, updateProject);
+
+// @route   PATCH /api/projects/:projectId
+// @desc    Update a project (title, description)
+// @access  Private (Owner only)
+router.patch('/:projectId', projectValidator, validate, updateProject);
 
 // @route   DELETE /api/projects/:projectId
 // @desc    Delete a project
