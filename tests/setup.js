@@ -14,7 +14,6 @@ afterAll(async () => {
   await mongoServer.stop();
 });
 
-// Optionnel: nettoyer la base de données entre chaque test
 beforeEach(async () => {
     const collections = mongoose.connection.collections;
     for (const key in collections) {

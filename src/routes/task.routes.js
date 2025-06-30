@@ -4,7 +4,6 @@ const router = express.Router({ mergeParams: true });
 const { createTask, getTasksByProject, updateTask, deleteTask } = require('../controllers/task.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 
-// Protéger toutes les routes de ce fichier
 router.use(authMiddleware);
 
 // @route   POST /api/projects/:projectId/tasks

@@ -9,7 +9,6 @@ describe('Project Routes', () => {
     let projectId;
 
     beforeEach(async () => {
-        // Créer un utilisateur et obtenir un token
         const user = new User({ name: 'Project Tester', email: 'project@test.com', password: 'password' });
         await user.save();
         userId = user._id;
@@ -22,7 +21,6 @@ describe('Project Routes', () => {
             });
         token = res.body.token;
 
-        // Créer un projet de test
         const project = new Project({ title: 'Test Project', description: 'Test Desc', owner: userId, collaborators: [userId] });
         await project.save();
         projectId = project._id;

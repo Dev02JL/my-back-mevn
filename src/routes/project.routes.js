@@ -6,10 +6,8 @@ const taskRouter = require('./task.routes'); // Importer le routeur des tâches
 const { projectValidator } = require('../validators/project.validator');
 const validate = require('../middlewares/validator.middleware');
 
-// Toutes les routes ici sont protégées et nécessitent un token valide.
 router.use(authMiddleware);
 
-// Imbriquer les routes des tâches
 router.use('/:projectId/tasks', taskRouter);
 
 // @route   POST /api/projects

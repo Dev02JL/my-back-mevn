@@ -6,7 +6,6 @@ const validate = (req, res, next) => {
         return next();
     }
 
-    // Extraire les messages d'erreur pour les renvoyer
     const extractedErrors = [];
     errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
 

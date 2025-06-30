@@ -1,8 +1,6 @@
 const app = require('./app');
 const mongoose = require('mongoose');
 
-// --- Database Connection ---
-// L'URI de MongoDB devrait idéalement être dans un fichier .env
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/mevn-app";
 
 mongoose.connect(MONGO_URI)

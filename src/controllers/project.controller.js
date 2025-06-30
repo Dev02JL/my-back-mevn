@@ -3,7 +3,6 @@ const User = require('../models/user.model');
 const Task = require('../models/task.model');
 const asyncHandler = require('express-async-handler');
 
-// Créer un nouveau projet
 exports.createProject = asyncHandler(async (req, res) => {
     const { title, description } = req.body;
     const ownerId = req.user.id;
@@ -19,14 +18,12 @@ exports.createProject = asyncHandler(async (req, res) => {
     res.status(201).json(newProject);
 });
 
-// Obtenir tous les projets d'un utilisateur
 exports.getProjects = asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const projects = await Project.find({ collaborators: userId }).populate('owner', 'name email').populate('collaborators', 'name email');
     res.status(200).json(projects);
 });
 
-// Mettre à jour un projet
 exports.updateProject = asyncHandler(async (req, res) => {
     const { projectId } = req.params;
     const { title, description } = req.body;
@@ -51,7 +48,6 @@ exports.updateProject = asyncHandler(async (req, res) => {
     res.status(200).json(project);
 });
 
-// Supprimer un projet
 exports.deleteProject = asyncHandler(async (req, res) => {
     const { projectId } = req.params;
     const requesterId = req.user.id;
@@ -74,7 +70,6 @@ exports.deleteProject = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'Projet et tâches associées supprimés avec succès.' });
 });
 
-// Ajouter un collaborateur à un projet
 exports.addCollaborator = asyncHandler(async (req, res) => {
     const { projectId } = req.params;
     const { email } = req.body;
@@ -110,7 +105,6 @@ exports.addCollaborator = asyncHandler(async (req, res) => {
     res.status(200).json(updatedProject);
 });
 
-// Obtenir le détail d'un projet
 exports.getProjectById = asyncHandler(async (req, res) => {
     const { projectId } = req.params;
     const userId = req.user.id;

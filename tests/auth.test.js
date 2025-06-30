@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../src/app'); // Importer l'application principale
+const app = require('../src/app');
 
 describe('Auth Routes', () => {
 
